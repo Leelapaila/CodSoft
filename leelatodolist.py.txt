@@ -1,0 +1,39 @@
+class Task:
+    def __init__(self, task_id, title, description, due_date, status="Incomplete"):
+        self.task_id = task_id
+        self.title = title
+        self.description = description
+        self.due_date = due_date
+        self.status = status
+
+class ToDoList:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def display_tasks(self):
+        for task in self.tasks:
+            print(f"{task.task_id}. {task.title} - Due: {task.due_date} [{task.status}]")
+
+    def mark_task_complete(self, task_id):
+        for task in self.tasks:
+            if task.task_id == task_id:
+                task.status = "Complete"
+                break
+
+    def delete_task(self, task_id):
+        self.tasks = [task for task in self.tasks if task.task_id != task_id]
+if __name__ == "__main__":
+    todo_list = ToDoList()
+    todo_list.add_task(Task(1, "Finish project", "Complete the To-Do List project", "2024-04-10"))
+    todo_list.add_task(Task(2, "Buy groceries", "Buy milk, eggs, and bread", "2024-04-02"))
+    print("Current Tasks:")
+    todo_list.display_tasks()
+    todo_list.mark_task_complete(2)
+    print("\nTasks after marking one complete:")
+    todo_list.display_tasks()
+    todo_list.delete_task(1)
+    print("\nTasks after deleting one:")
+    todo_list.display_tasks()
